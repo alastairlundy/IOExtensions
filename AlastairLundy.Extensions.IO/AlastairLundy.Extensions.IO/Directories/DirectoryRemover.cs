@@ -36,8 +36,7 @@ public class DirectoryRemover : IDirectoryRemover
     }
     
     public event EventHandler<string> DirectoryDeleted; 
-    public event EventHandler<string> FileDeleted;
-
+    
     /// <summary>
     /// Attempts to delete the specified Directory.
     /// </summary>

@@ -26,7 +26,6 @@ namespace AlastairLundy.Extensions.IO.Directories.Abstractions;
 public interface IDirectoryRemover
 {
     public event EventHandler<string> DirectoryDeleted; 
-    public event EventHandler<string> FileDeleted;
     
     public bool TryDeleteDirectory(string directory, bool deleteEmptyDirectory, bool deleteParentDirectory);
     
