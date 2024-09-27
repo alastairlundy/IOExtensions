@@ -28,7 +28,7 @@ using AlastairLundy.Extensions.IO.Localizations;
 
 namespace AlastairLundy.Extensions.IO.Directories;
 
-public class DirectoryRemover : IDirectoryRemover
+public class DirectoryRemover : IDirectoryRemover, IRecursiveDirectoryRemover
 {
     public DirectoryRemover()
     {
@@ -36,6 +36,7 @@ public class DirectoryRemover : IDirectoryRemover
     }
     
     public event EventHandler<string> DirectoryDeleted; 
+    public event EventHandler<string> FileDeleted;
     
     /// <summary>
     /// Attempts to delete the specified Directory.
@@ -86,6 +87,25 @@ public class DirectoryRemover : IDirectoryRemover
     }
 
     /// <summary>
+    /// Attempts to delete a directory recursively by deleting sub-folders and files before deleting the directory.
+    /// </summary>
+    /// <param name="directory">The parent directory to be deleted.</param>
+    /// <param name="deleteEmptyDirectories">Whether to delete empty sub-folders or not.</param>
+    /// <returns>true if the directory was recursively deleted successfully; returns false otherwise.</returns>
+    public bool TryDeleteDirectoryRecursively(string directory, bool deleteEmptyDirectories)
+    {
+        try
+        {
+            DeleteDirectoryRecursively(directory, deleteEmptyDirectories);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    
+    /// <summary>
     /// Deletes a parent directory of a directory.
     /// </summary>
     /// <param name="directory">The directory to get the parent directory of.</param>
@@ -106,6 +126,59 @@ public class DirectoryRemover : IDirectoryRemover
 
         throw new DirectoryNotFoundException(Resources.Exceptions_DirectoryNotFound.Replace("{x}", directory));
     }
+    
+        /// <summary>
+    /// Deletes a directory recursively by deleting 
+    /// </summary>
+    /// <param name="directory">The directory to be recursively deleted.</param>
+    /// <param name="deleteEmptyDirectory">Whether to delete empty directories or not.</param>
+    /// <exception cref="DirectoryNotFoundException">Thrown if the directory does not exist or could not be located.</exception>
+    public void DeleteDirectoryRecursively(string directory, bool deleteEmptyDirectory)
+    {
+        if (Directory.Exists(directory))
+        {
+            if (Directory.GetDirectories(directory).Length > 0)
+            {
+                foreach (string subDirectory in Directory.GetDirectories(directory))
+                {
+                    if (Directory.GetFiles(subDirectory).Length > 0)
+                    {
+                        foreach (string file in Directory.GetFiles(subDirectory))
+                        {
+                            File.Delete(file);
+                            FileDeleted?.Invoke(this, Resources.File_Deleted.Replace("{x}", file));
+                        }
+                    }
+
+                    int numberOfFiles = Directory.GetFiles(directory).Length;
+
+                    if (deleteEmptyDirectory == true && numberOfFiles == 0 || numberOfFiles > 0)
+                    {
+                        Directory.Delete(subDirectory);
+
+                        if (deleteEmptyDirectory == true && numberOfFiles == 0)
+                        {
+                            DirectoryDeleted?.Invoke(this, Resources.EmptyDirectory_Deleted.Replace("{x}", subDirectory));
+                        }
+                        else
+                        {
+                            DirectoryDeleted?.Invoke(this, Resources.Directory_Deleted.Replace("{x}", subDirectory));
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (deleteEmptyDirectory)
+                {
+                    Directory.Delete(directory);
+                    DirectoryDeleted?.Invoke(this, Resources.Directory_Deleted.Replace("{x}", directory));
+                }
+            }
+        }
+
+        throw new DirectoryNotFoundException(Resources.Exceptions_DirectoryNotFound.Replace("{x}", directory));
+    }
 
     /// <summary>
     /// Deletes multiple specified directories.
@@ -120,6 +193,4 @@ public class DirectoryRemover : IDirectoryRemover
             DeleteDirectory(directory, deleteEmptyDirectory, deleteParentDirectory);
         }
     }
-
-
 }
