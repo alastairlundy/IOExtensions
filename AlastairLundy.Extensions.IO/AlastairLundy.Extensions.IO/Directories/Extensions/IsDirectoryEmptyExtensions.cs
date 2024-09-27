@@ -21,6 +21,7 @@
     SOFTWARE.
  */
 
+using System.IO;
 using AlastairLundy.Extensions.IO.Localizations;
 
 namespace AlastairLundy.Extensions.IO.Directories.Extensions;

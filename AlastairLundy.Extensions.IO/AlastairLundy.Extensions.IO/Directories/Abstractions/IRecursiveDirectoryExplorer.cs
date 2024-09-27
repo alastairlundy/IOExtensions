@@ -21,6 +21,8 @@
     SOFTWARE.
  */
 
+using System.Collections.Generic;
+
 namespace AlastairLundy.Extensions.IO.Directories.Abstractions;
 
 public interface IRecursiveDirectoryExplorer

@@ -21,6 +21,8 @@
     SOFTWARE.
  */
 
+using System;
+
 namespace AlastairLundy.Extensions.IO.Directories.Abstractions;
 
 public interface IRecursiveDirectoryRemover

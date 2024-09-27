@@ -21,6 +21,9 @@
     SOFTWARE.
  */
 
+using System;
+using System.Collections.Generic;
+
 namespace AlastairLundy.Extensions.IO.Directories.Abstractions;
 
 public interface IDirectoryRemover

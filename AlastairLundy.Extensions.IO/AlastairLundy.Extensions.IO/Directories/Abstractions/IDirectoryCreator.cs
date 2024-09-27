@@ -21,6 +21,8 @@
     SOFTWARE.
  */
 
+using System.IO;
+
 namespace AlastairLundy.Extensions.IO.Directories.Abstractions;
 
 public interface IDirectoryCreator

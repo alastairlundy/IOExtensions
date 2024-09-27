@@ -21,6 +21,8 @@
     SOFTWARE.
  */
 
+using System;
+
 using AlastairLundy.Extensions.IO.Localizations;
 
 namespace AlastairLundy.Extensions.IO.Permissions;
