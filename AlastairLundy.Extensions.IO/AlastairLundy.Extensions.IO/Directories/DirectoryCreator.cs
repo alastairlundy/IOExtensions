@@ -22,6 +22,7 @@
  */
 
 using System.Text;
+
 using AlastairLundy.Extensions.IO.Directories.Abstractions;
 
 namespace AlastairLundy.Extensions.IO.Directories;

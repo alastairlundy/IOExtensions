@@ -22,6 +22,7 @@
  */
 
 using AlastairLundy.Extensions.IO.Files.Abstractions;
+
 using AlastairLundy.Extensions.IO.Localizations;
 
 namespace AlastairLundy.Extensions.IO.Files;
