@@ -35,6 +35,4 @@ public interface IDirectoryRemover
 
     public void DeleteDirectories(IEnumerable<string> directories, bool deleteEmptyDirectory,
         bool deleteParentDirectory);
-
-    
 }
