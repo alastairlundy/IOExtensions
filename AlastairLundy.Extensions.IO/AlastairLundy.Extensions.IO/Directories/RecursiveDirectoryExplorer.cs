@@ -98,9 +98,9 @@ public class RecursiveDirectoryExplorer : IRecursiveDirectoryExplorer
         GetRecursiveDirectoryContents(string directory,
             bool includeEmptyDirectories)
     {
-        List<string> files = new List<string>();
-        List<string> directories = new List<string>();
-        List<string> emptyDirectories = new List<string>();
+        List<string> files = new();
+        List<string> directories = new();
+        List<string> emptyDirectories = new();
         
         if (Directory.Exists(directory))
         {
