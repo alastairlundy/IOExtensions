@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+
 using AlastairLundy.Extensions.IO.Directories.Abstractions;
 using AlastairLundy.Extensions.IO.Directories.Extensions;
 
