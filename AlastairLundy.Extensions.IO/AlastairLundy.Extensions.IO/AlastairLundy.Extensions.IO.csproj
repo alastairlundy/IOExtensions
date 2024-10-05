@@ -4,7 +4,7 @@
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.0.0-preview.1</Version>
+        <Version>1.0.0-preview.2</Version>
         <Title>AlastairLundy.Extensions.IO</Title>
         <Authors>AlastairLundy</Authors>
         <Copyright>Copyright (c) Alastair Lundy 2024</Copyright>
@@ -12,7 +12,13 @@
         <RepositoryType>git</RepositoryType>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Description>A library to make programmatic directory deletion and creation in .NET easier.</Description>
-        <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
+        <PackageReleaseNotes>## Changes since 1.0.0 Preview 1
+
+### Changes
+* Changed license to LGPLv3
+
+### Additions
+* Added ``IKeyValueFileProvider``, ``JsonKeyValueFileProvider``, ``TextKeyValueFileProvider``, ``XmlKeyValueFileProvider``, and ``ResourcesKeyValueFileProvider`` - These have been moved and renamed from LocalizationKit to allow better for better use/re-use by non localization projects.</PackageReleaseNotes>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <TargetFramework>net8.0</TargetFramework>
