@@ -21,10 +21,14 @@ namespace AlastairLundy.Extensions.IO.Directories.Abstractions;
 
 public interface IDirectoryCreator
 {
+#if NET8_OR_GREATER
     public bool TryCreateDirectory(string directoryPath,string newDirectoryName, UnixFileMode unixFileMode, bool createParentPaths);
-
     public void CreateDirectory(string directoryPath, string newDirectoryName, UnixFileMode unixFileMode, bool createParentPaths);
-
     public bool TryCreateParentDirectory(string directoryPath, UnixFileMode unixFileMode);
     public void CreateParentDirectory(string parentDirectory, UnixFileMode unixFileMode);
+#endif
+    public bool TryCreateDirectory(string directoryPath,string newDirectoryName, bool createParentPaths);
+    public void CreateDirectory(string directoryPath, string newDirectoryName, bool createParentPaths);
+    public bool TryCreateParentDirectory(string directoryPath);
+    public void CreateParentDirectory(string parentDirectory);
 }

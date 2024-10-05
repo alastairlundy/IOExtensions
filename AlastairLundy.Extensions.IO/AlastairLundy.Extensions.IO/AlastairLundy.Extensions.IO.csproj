@@ -23,7 +23,7 @@
 * Added ``IKeyValueFileProvider``, ``JsonKeyValueFileProvider``, ``TextKeyValueFileProvider``, ``XmlKeyValueFileProvider``, and ``ResourcesKeyValueFileProvider`` - These have been moved and renamed from LocalizationKit to allow better for better use/re-use by non localization projects.</PackageReleaseNotes>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
