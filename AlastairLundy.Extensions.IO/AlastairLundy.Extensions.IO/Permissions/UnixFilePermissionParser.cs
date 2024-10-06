@@ -24,7 +24,7 @@ namespace AlastairLundy.Extensions.IO.Permissions;
 
 public static class UnixFilePermissionParser
 {
-#if NET8_OR_GREATER
+#if NET8_0_OR_GREATER
     /// <summary>
     /// Parse a Unix file permission in octal notation to a UnixFileMode enum.
     /// </summary>
