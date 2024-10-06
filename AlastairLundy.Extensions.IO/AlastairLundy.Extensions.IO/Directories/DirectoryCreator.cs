@@ -26,7 +26,7 @@ namespace AlastairLundy.Extensions.IO.Directories;
 
 public class DirectoryCreator : IDirectoryCreator
 {
-#if NET8_OR_GREATER
+#if NET8_0_OR_GREATER
     /// <summary>
     /// Attempts to create a new directory with the specified parameters.
     /// </summary>
@@ -50,10 +50,18 @@ public class DirectoryCreator : IDirectoryCreator
 #endif
     public bool TryCreateDirectory(string directoryPath, string newDirectoryName, bool createParentPaths)
     {
-        throw new NotImplementedException();
+        try
+        {
+            CreateDirectory(directoryPath, newDirectoryName, createParentPaths);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
-    #if NET8_OR_GREATER
+    #if NET8_0_OR_GREATER
     /// <summary>
     /// 
     /// </summary>
@@ -86,7 +94,7 @@ public class DirectoryCreator : IDirectoryCreator
         }
     }
 
-#if  NET8_OR_GREATER
+#if  NET8_0_OR_GREATER
     /// <summary>
     /// Recursively creates the parent directory as needed.
     /// </summary>
@@ -147,7 +155,7 @@ public class DirectoryCreator : IDirectoryCreator
         }
     }
 
-#if NET8_OR_GREATER
+#if NET8_0_OR_GREATER
     /// <summary>
     /// Creates a new directory with the specified parameters.
     /// </summary>
@@ -155,15 +163,17 @@ public class DirectoryCreator : IDirectoryCreator
     /// <param name="newDirectoryName"></param>
     /// <param name="unixFileMode">The file mode to use to create the directory. Only used on Unix based systems.</param>
     /// <param name="createParentPaths">Whether to create parent directory paths, if required, when creating the new directory.</param>
-    public void CreateDirectory(string directoryPath, string newDirectoryName, UnixFileMode unixFileMode, bool createParentPaths)
+    public void CreateDirectory(string directoryPath, string newDirectoryName, UnixFileMode unixFileMode,
+        bool createParentPaths)
     {
         if (createParentPaths)
         {
             if (directoryPath.EndsWith(newDirectoryName))
             {
-                directoryPath = directoryPath.Remove(directoryPath.Length - newDirectoryName.Length, newDirectoryName.Length);
+                directoryPath = directoryPath.Remove(directoryPath.Length - newDirectoryName.Length,
+                    newDirectoryName.Length);
             }
-            
+
             CreateParentDirectory(directoryPath, unixFileMode);
         }
         else
@@ -177,6 +187,7 @@ public class DirectoryCreator : IDirectoryCreator
                 Directory.CreateDirectory(directoryPath, unixFileMode);
             }
         }
+    }
 #endif
     
     /// <summary>
