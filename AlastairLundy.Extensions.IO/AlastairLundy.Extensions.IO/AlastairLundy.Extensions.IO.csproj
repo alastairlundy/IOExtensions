@@ -23,6 +23,7 @@
 
     <ItemGroup>
       <PackageReference Include="AlastairLundy.Extensions.System" Version="5.*" />
+        <PackageReference Include="NLine.Library" Version="2.0.2" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
@@ -60,6 +61,10 @@
           <PackagePath>LICENSE.txt</PackagePath>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Files\Concatenation\Abstractions\" />
     </ItemGroup>
 
 </Project>
