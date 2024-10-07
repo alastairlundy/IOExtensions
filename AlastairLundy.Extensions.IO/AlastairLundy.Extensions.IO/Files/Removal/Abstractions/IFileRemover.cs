@@ -15,9 +15,29 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-namespace AlastairLundy.Extensions.IO.Files.Abstractions;
+using System;
+using System.Collections.Generic;
 
-public interface IFileFinder
+namespace AlastairLundy.Extensions.IO.Files.Abstractions
 {
-    public bool IsAFile(string filePath);
+    public interface IFileRemover
+    {
+#if NET6_0_OR_GREATER
+        public event EventHandler<string> FileDeleted;
+    
+        public bool TryDeleteFile(string file);
+
+        public void DeleteFile(string file);
+
+        public void DeleteFiles(IEnumerable<string> files);
+#else
+         event EventHandler<string> FileDeleted;
+    
+         bool TryDeleteFile(string file);
+
+         void DeleteFile(string file);
+
+         void DeleteFiles(IEnumerable<string> files);        
+#endif
+    }
 }
