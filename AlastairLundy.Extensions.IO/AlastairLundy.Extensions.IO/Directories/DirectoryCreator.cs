@@ -22,10 +22,14 @@ using System.Text;
 
 using AlastairLundy.Extensions.IO.Directories.Abstractions;
 
-namespace AlastairLundy.Extensions.IO.Directories;
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif
 
-public class DirectoryCreator : IDirectoryCreator
+namespace AlastairLundy.Extensions.IO.Directories
 {
+    public class DirectoryCreator : IDirectoryCreator
+    {
 #if NET8_0_OR_GREATER
     /// <summary>
     /// Attempts to create a new directory with the specified parameters.
@@ -48,20 +52,20 @@ public class DirectoryCreator : IDirectoryCreator
         }
     }
 #endif
-    public bool TryCreateDirectory(string directoryPath, string newDirectoryName, bool createParentPaths)
-    {
-        try
+        public bool TryCreateDirectory(string directoryPath, string newDirectoryName, bool createParentPaths)
         {
-            CreateDirectory(directoryPath, newDirectoryName, createParentPaths);
-            return true;
+            try
+            {
+                CreateDirectory(directoryPath, newDirectoryName, createParentPaths);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
-        catch
-        {
-            return false;
-        }
-    }
 
-    #if NET8_0_OR_GREATER
+#if NET8_0_OR_GREATER
     /// <summary>
     /// 
     /// </summary>
@@ -81,18 +85,18 @@ public class DirectoryCreator : IDirectoryCreator
         }
     }
 #endif
-    public bool TryCreateParentDirectory(string directoryPath)
-    {
-        try
+        public bool TryCreateParentDirectory(string directoryPath)
         {
-            CreateParentDirectory(directoryPath);
-            return true;
+            try
+            {
+                CreateParentDirectory(directoryPath);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
-        catch
-        {
-            return false;
-        }
-    }
 
 #if  NET8_0_OR_GREATER
     /// <summary>
@@ -128,32 +132,32 @@ public class DirectoryCreator : IDirectoryCreator
     }
 #endif
     
-    public void CreateParentDirectory(string parentDirectory)
-    {
-        string[] directories = parentDirectory.Split(Path.DirectorySeparatorChar);
-
-        List<string> directoriesToCreate = new List<string>();
-        
-        for (int i = 0; i < directories.Length; i++)
+        public void CreateParentDirectory(string parentDirectory)
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            string[] directories = parentDirectory.Split(Path.DirectorySeparatorChar);
 
-            for (int j = 0; j < i; j++)
+            List<string> directoriesToCreate = new List<string>();
+        
+            for (int i = 0; i < directories.Length; i++)
             {
-                stringBuilder.Append(directories[i][j]);
-            }
+                StringBuilder stringBuilder = new StringBuilder();
+
+                for (int j = 0; j < i; j++)
+                {
+                    stringBuilder.Append(directories[i][j]);
+                }
             
-            directoriesToCreate.Add(stringBuilder.ToString());
-        }
+                directoriesToCreate.Add(stringBuilder.ToString());
+            }
         
-        foreach (string directory in directoriesToCreate)
-        {
-            if (Directory.Exists(directory) == false)
+            foreach (string directory in directoriesToCreate)
             {
-                CreateDirectory(directory, directory, false);
+                if (Directory.Exists(directory) == false)
+                {
+                    CreateDirectory(directory, directory, false);
+                }
             }
         }
-    }
 
 #if NET8_0_OR_GREATER
     /// <summary>
@@ -190,32 +194,33 @@ public class DirectoryCreator : IDirectoryCreator
     }
 #endif
     
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="directoryPath"></param>
-    /// <param name="newDirectoryName"></param>
-    /// <param name="createParentPaths"></param>
-    public void CreateDirectory(string directoryPath, string newDirectoryName, bool createParentPaths)
-    {
-        if (createParentPaths)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="directoryPath"></param>
+        /// <param name="newDirectoryName"></param>
+        /// <param name="createParentPaths"></param>
+        public void CreateDirectory(string directoryPath, string newDirectoryName, bool createParentPaths)
         {
-            if (directoryPath.EndsWith(newDirectoryName))
+            if (createParentPaths)
             {
-                directoryPath = directoryPath.Remove(directoryPath.Length - newDirectoryName.Length, newDirectoryName.Length);
-            }
+                if (directoryPath.EndsWith(newDirectoryName))
+                {
+                    directoryPath = directoryPath.Remove(directoryPath.Length - newDirectoryName.Length, newDirectoryName.Length);
+                }
             
-            CreateParentDirectory(directoryPath);
-        }
-        else
-        {
-            if (OperatingSystem.IsWindows())
-            {
-                Directory.CreateDirectory(directoryPath);
+                CreateParentDirectory(directoryPath);
             }
             else
             {
-                Directory.CreateDirectory(directoryPath);
+                if (OperatingSystem.IsWindows())
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+                else
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
             }
         }
     }

@@ -23,21 +23,21 @@ using System.Resources;
 
 using AlastairLundy.Extensions.IO.Providers.KeyValueProviders.Abstractions;
 
-namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders;
-
-/// <summary>
-/// A class to read and write KeyValue pairs to/from Resource files.
-/// </summary>
-public class ResourceKeyValueFileProvider : IKeyValueFileProvider
+namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders
 {
     /// <summary>
-    /// Retrieves string Keys and Values stored in a Resource File.
+    /// A class to read and write KeyValue pairs to/from Resource files.
     /// </summary>
-    /// <param name="pathToFile"></param>
-    /// <returns></returns>
-    /// <exception cref="NullReferenceException"></exception>
-    public KeyValuePair<string, string>[] Get(string pathToFile)
+    public class ResourceKeyValueFileProvider : IKeyValueFileProvider
     {
+        /// <summary>
+        /// Retrieves string Keys and Values stored in a Resource File.
+        /// </summary>
+        /// <param name="pathToFile"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public KeyValuePair<string, string>[] Get(string pathToFile)
+        {
             List<KeyValuePair<string, string>> list = new List<KeyValuePair<string, string>>();
 
             string baseName = pathToFile;
@@ -60,29 +60,34 @@ public class ResourceKeyValueFileProvider : IKeyValueFileProvider
             ResourceReader reader = new ResourceReader(resourceManager.GetStream(pathToFile) ?? throw new NullReferenceException());
 
             IDictionaryEnumerator readerEnumerator = reader.GetEnumerator();
-            using var readerEnumerator1 = readerEnumerator as IDisposable;
-
+            
             while (readerEnumerator.MoveNext())
             {
-                list.Add(new KeyValuePair<string, string>((string)readerEnumerator.Key,
-                    (string)readerEnumerator
-                        .Value));
+                try
+                {
+                    list.Add(new KeyValuePair<string, string>((string)readerEnumerator.Key,
+                        (string)readerEnumerator
+                            .Value));
+                }
+                catch(Exception exception)
+                {
+                    throw new Exception(exception.Message, exception);
+                }
             }
-            
-            readerEnumerator.Reset();
+
             reader.Dispose();
             reader.Close();
 
             return list.ToArray();
-    }
+        }
 
-    /// <summary>
-    /// Writes the specified data to a Resource file.
-    /// </summary>
-    /// <param name="data"></param>
-    /// <param name="pathToFile"></param>
-    public void WriteToFile(KeyValuePair<string, string>[] data, string pathToFile)
-    {
+        /// <summary>
+        /// Writes the specified data to a Resource file.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="pathToFile"></param>
+        public void WriteToFile(KeyValuePair<string, string>[] data, string pathToFile)
+        {
             ResourceWriter resourceWriter = new ResourceWriter(pathToFile);
 
             foreach (KeyValuePair<string, string> pair in data)
@@ -93,5 +98,6 @@ public class ResourceKeyValueFileProvider : IKeyValueFileProvider
             resourceWriter.Generate();
             
             resourceWriter.Close();
+        }
     }
 }

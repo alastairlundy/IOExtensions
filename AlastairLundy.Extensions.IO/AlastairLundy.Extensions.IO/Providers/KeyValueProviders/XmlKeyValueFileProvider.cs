@@ -22,50 +22,51 @@ using System.Xml.Serialization;
 
 using AlastairLundy.Extensions.IO.Providers.KeyValueProviders.Abstractions;
 
-namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders;
-
-/// <summary>
-/// A class to read and write KeyValue Pairs to/from XML files.
-/// </summary>
-public class XmlKeyValueFileProvider : IKeyValueFileProvider
+namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders
 {
     /// <summary>
-    /// Retrieves string Keys and Values stored in an XML File.
+    /// A class to read and write KeyValue Pairs to/from XML files.
     /// </summary>
-    /// <param name="pathToFile"></param>
-    /// <returns></returns>
-    public KeyValuePair<string, string>[] Get(string pathToFile)
+    public class XmlKeyValueFileProvider : IKeyValueFileProvider
     {
-        XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<KeyValuePair<string, string>>));
-
-        KeyValuePair<string, string>[] array;
-
-        using (Stream reader = new FileStream(pathToFile, FileMode.Open, FileAccess.Read))
+        /// <summary>
+        /// Retrieves string Keys and Values stored in an XML File.
+        /// </summary>
+        /// <param name="pathToFile"></param>
+        /// <returns></returns>
+        public KeyValuePair<string, string>[] Get(string pathToFile)
         {
-            try
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<KeyValuePair<string, string>>));
+
+            KeyValuePair<string, string>[] array;
+
+            using (Stream reader = new FileStream(pathToFile, FileMode.Open, FileAccess.Read))
             {
-                // Call the Deserialize method to restore the object's state.
-                array = xmlSerializer.Deserialize(reader) as KeyValuePair<string, string>[] ?? throw new NullReferenceException();
+                try
+                {
+                    // Call the Deserialize method to restore the object's state.
+                    array = xmlSerializer.Deserialize(reader) as KeyValuePair<string, string>[] ?? throw new NullReferenceException();
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
             }
-            catch(Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+
+            return array;
         }
 
-        return array;
-    }
-
-    /// <summary>
-    /// Writes the specified data to a XML file.
-    /// </summary>
-    /// <param name="data"></param>
-    /// <param name="pathToFile"></param>
-    public void WriteToFile(KeyValuePair<string, string>[] data, string pathToFile)
-    {
+        /// <summary>
+        /// Writes the specified data to a XML file.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="pathToFile"></param>
+        public void WriteToFile(KeyValuePair<string, string>[] data, string pathToFile)
+        {
             FileStream fileStream = new FileStream(pathToFile, FileMode.Create);
             
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<KeyValuePair<string, string>>));
             xmlSerializer.Serialize(fileStream, data);
+        }
     }
 }

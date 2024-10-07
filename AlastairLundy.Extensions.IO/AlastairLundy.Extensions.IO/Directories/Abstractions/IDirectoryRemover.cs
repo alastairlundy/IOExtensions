@@ -18,18 +18,32 @@
 using System;
 using System.Collections.Generic;
 
-namespace AlastairLundy.Extensions.IO.Directories.Abstractions;
-
-public interface IDirectoryRemover
+namespace AlastairLundy.Extensions.IO.Directories.Abstractions
 {
-    public event EventHandler<string> DirectoryDeleted; 
+    public interface IDirectoryRemover
+    {
+    #if NET6_0_OR_GREATER || NETSTANDARD2_1
+        public event EventHandler<string> DirectoryDeleted; 
     
-    public bool TryDeleteDirectory(string directory, bool deleteEmptyDirectory, bool deleteParentDirectory);
+        public bool TryDeleteDirectory(string directory, bool deleteEmptyDirectory, bool deleteParentDirectory);
     
-    public void DeleteDirectory(string directory, bool deleteEmptyDirectory, bool deleteParentDirectory);
+        public void DeleteDirectory(string directory, bool deleteEmptyDirectory, bool deleteParentDirectory);
 
-    public void DeleteParentDirectory(string directory, bool deleteEmptyDirectory);
+        public void DeleteParentDirectory(string directory, bool deleteEmptyDirectory);
 
-    public void DeleteDirectories(IEnumerable<string> directories, bool deleteEmptyDirectory,
-        bool deleteParentDirectory);
+        public void DeleteDirectories(IEnumerable<string> directories, bool deleteEmptyDirectory,
+            bool deleteParentDirectory);
+#else
+         event EventHandler<string> DirectoryDeleted; 
+    
+         bool TryDeleteDirectory(string directory, bool deleteEmptyDirectory, bool deleteParentDirectory);
+    
+         void DeleteDirectory(string directory, bool deleteEmptyDirectory, bool deleteParentDirectory);
+
+         void DeleteParentDirectory(string directory, bool deleteEmptyDirectory);
+
+         void DeleteDirectories(IEnumerable<string> directories, bool deleteEmptyDirectory,
+            bool deleteParentDirectory);
+#endif
+    }
 }

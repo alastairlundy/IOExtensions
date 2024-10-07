@@ -17,14 +17,23 @@
 
 using System;
 
-namespace AlastairLundy.Extensions.IO.Directories.Abstractions;
-
-public interface IRecursiveDirectoryRemover
+namespace AlastairLundy.Extensions.IO.Directories.Abstractions
 {
-    public event EventHandler<string> DirectoryDeleted; 
-    public event EventHandler<string> FileDeleted;
-    public void DeleteDirectoryRecursively(string directory, bool deleteEmptyDirectory);
+    public interface IRecursiveDirectoryRemover
+    {
+#if NET6_0_OR_GREATER || NETSTANDARD2_1
+        public event EventHandler<string> DirectoryDeleted; 
+        public event EventHandler<string> FileDeleted;
+        public void DeleteDirectoryRecursively(string directory, bool deleteEmptyDirectory);
     
-    public bool TryDeleteDirectoryRecursively(string directory, bool deleteEmptyDirectories);
+        public bool TryDeleteDirectoryRecursively(string directory, bool deleteEmptyDirectories);
 
+#else
+        event EventHandler<string> DirectoryDeleted; 
+        event EventHandler<string> FileDeleted;
+        void DeleteDirectoryRecursively(string directory, bool deleteEmptyDirectory);
+    
+        bool TryDeleteDirectoryRecursively(string directory, bool deleteEmptyDirectories);
+#endif
+    }
 }

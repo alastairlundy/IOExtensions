@@ -20,10 +20,10 @@ using System.IO;
 
 using AlastairLundy.Extensions.IO.Localizations;
 
-namespace AlastairLundy.Extensions.IO.Permissions;
-
-public static class UnixFilePermissionParser
+namespace AlastairLundy.Extensions.IO.Permissions
 {
+    public static class UnixFilePermissionParser
+    {
 #if NET8_0_OR_GREATER
     /// <summary>
     /// Parse a Unix file permission in octal notation to a UnixFileMode enum.
@@ -169,51 +169,79 @@ public static class UnixFilePermissionParser
         }
     }
 #endif
-    /// <summary>
-    /// Detects whether a Unix Octal file permission notation is valid.
-    /// </summary>
-    /// <param name="notation">The numeric notation to be compared.</param>
-    /// <returns>true if a valid unix file permission octal notation has been provided; returns false otherwise.</returns>
-    public static bool IsNumericNotation(string notation)
-    {
-        if (notation.Length == 4 && int.TryParse(notation, out int result))
+        /// <summary>
+        /// Detects whether a Unix Octal file permission notation is valid.
+        /// </summary>
+        /// <param name="notation">The numeric notation to be compared.</param>
+        /// <returns>true if a valid unix file permission octal notation has been provided; returns false otherwise.</returns>
+        public static bool IsNumericNotation(string notation)
         {
-            return result switch
+            if (notation.Length == 4 && int.TryParse(notation, out int result))
             {
-                0 or 111 or 222 or 333 or 444 or 555 or 666 or 700 or 740 or 777 => true,
-                _ => false
-            };
+               #if NET6_0_OR_GREATER
+                return result switch
+                {
+                    0 or 111 or 222 or 333 or 444 or 555 or 666 or 700 or 740 or 777 => true,
+                    _ => false
+                };
+               #else
+                return result == 0 ||
+                       result == 111 ||
+                       result == 222 ||
+                       result == 333 ||
+                       result == 444 ||
+                       result == 555 ||
+                       result == 666 ||
+                       result == 700 ||
+                       result == 740 ||
+                       result == 777;
+                #endif
+            }
+
+            return false;
         }
 
-        return false;
-    }
-
-    /// <summary>
-    /// Detects whether a Unix symbolic file permission is valid.
-    /// </summary>
-    /// <param name="notation">The symbolic notation to be compared.</param>
-    /// <returns>true if a valid unix file permission symbolic notation has been provided; returns false otherwise.</returns>
-    public static bool IsSymbolicNotation(string notation)
-    {
-        if (notation.Length == 10)
+        /// <summary>
+        /// Detects whether a Unix symbolic file permission is valid.
+        /// </summary>
+        /// <param name="notation">The symbolic notation to be compared.</param>
+        /// <returns>true if a valid unix file permission symbolic notation has been provided; returns false otherwise.</returns>
+        public static bool IsSymbolicNotation(string notation)
         {
-            return notation switch
+            if (notation.Length == 10)
             {
-                "----------" or
-                    "---x--x--x" or
-                    "--w--w--w-" or
-                    "--wx-wx-wx" or
-                    "-r--r--r--" or
-                    "-r-xr-xr-x" or
-                    "-rw-rw-rw-" or
-                    "-rwx------" or
-                    "-rwxr-----" or
-                    "-rwxrwx---" or
-                    "-rwxrwxrwx" => true,
-                _ => false
-            };
-        }
+               #if NET6_0_OR_GREATER
+                return notation switch
+                {
+                    "----------" or
+                        "---x--x--x" or
+                        "--w--w--w-" or
+                        "--wx-wx-wx" or
+                        "-r--r--r--" or
+                        "-r-xr-xr-x" or
+                        "-rw-rw-rw-" or
+                        "-rwx------" or
+                        "-rwxr-----" or
+                        "-rwxrwx---" or
+                        "-rwxrwxrwx" => true,
+                    _ => false
+                };
+                #else
+                return notation == "----------" ||
+                       notation == "---x--x--x" ||
+                       notation == "--w--w--w-" ||
+                       notation == "--wx-wx-wx" ||
+                       notation == "-r--r--r--" ||
+                       notation == "-r-xr-xr-x" ||
+                       notation == "-rw-rw-rw-" ||
+                       notation == "-rwx------" ||
+                       notation == "-rwxr-----" ||
+                       notation == "-rwxrwx---" ||
+                       notation == "-rwxrwxrwx";
+                #endif
+            }
 
-        return false;
+            return false;
+        }
     }
 }

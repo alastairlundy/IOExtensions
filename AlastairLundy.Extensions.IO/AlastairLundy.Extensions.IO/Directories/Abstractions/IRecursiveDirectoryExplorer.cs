@@ -17,18 +17,32 @@
 
 using System.Collections.Generic;
 
-namespace AlastairLundy.Extensions.IO.Directories.Abstractions;
-
-public interface IRecursiveDirectoryExplorer
+namespace AlastairLundy.Extensions.IO.Directories.Abstractions
 {
-    public bool AreSubdirectoriesEmpty(string directory);
+    public interface IRecursiveDirectoryExplorer
+    {
+#if NET6_0_OR_GREATER || NETSTANDARD2_1
+        public bool AreSubdirectoriesEmpty(string directory);
 
-    public (IEnumerable<string> files, IEnumerable<string> directories) GetRecursiveDirectoryContents(string directory);
+        public (IEnumerable<string> files, IEnumerable<string> directories) GetRecursiveDirectoryContents(string directory);
 
-    public (IEnumerable<string> files, IEnumerable<string> directories, IEnumerable<string> emptyDirectories) GetRecursiveDirectoryContents(string directory, bool includeEmptyDirectories);
+        public (IEnumerable<string> files, IEnumerable<string> directories, IEnumerable<string> emptyDirectories) GetRecursiveDirectoryContents(string directory, bool includeEmptyDirectories);
 
-    public IEnumerable<string> GetRecursiveEmptyDirectories(string directory);
+        public IEnumerable<string> GetRecursiveEmptyDirectories(string directory);
 
-    public IEnumerable<string> GetFilesRecursively(string directory);
-    public IEnumerable<string> GetFolderRecursively(string directory);
+        public IEnumerable<string> GetFilesRecursively(string directory);
+        public IEnumerable<string> GetFolderRecursively(string directory);
+#else
+        bool AreSubdirectoriesEmpty(string directory);
+
+        (IEnumerable<string> files, IEnumerable<string> directories) GetRecursiveDirectoryContents(string directory);
+
+        (IEnumerable<string> files, IEnumerable<string> directories, IEnumerable<string> emptyDirectories) GetRecursiveDirectoryContents(string directory, bool includeEmptyDirectories);
+
+        IEnumerable<string> GetRecursiveEmptyDirectories(string directory);
+
+        IEnumerable<string> GetFilesRecursively(string directory);
+        IEnumerable<string> GetFolderRecursively(string directory);
+#endif
+    }
 }

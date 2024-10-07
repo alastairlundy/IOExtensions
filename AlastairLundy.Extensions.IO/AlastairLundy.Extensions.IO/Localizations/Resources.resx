@@ -138,4 +138,7 @@
   <data name="File.Deleted" xml:space="preserve">
     <value>File {x} was deleted.</value>
   </data>
+  <data name="Exceptions.NoFileProvided" xml:space="preserve">
+    <value>No File was provided as an argument.</value>
+  </data>
 </root>

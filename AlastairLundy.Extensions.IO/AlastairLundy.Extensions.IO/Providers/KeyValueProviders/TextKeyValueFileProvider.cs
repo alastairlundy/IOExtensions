@@ -22,20 +22,20 @@ using System.Text;
 
 using AlastairLundy.Extensions.IO.Providers.KeyValueProviders.Abstractions;
 
-namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders;
-
-/// <summary>
-/// A class to read and write KeyValue Pairs to/from Text files.
-/// </summary>
-public class TextKeyValueFileProvider : IKeyValueFileProvider
+namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders
 {
     /// <summary>
-    /// Retrieves string Keys and Values stored in a .txt Text File.
+    /// A class to read and write KeyValue Pairs to/from Text files.
     /// </summary>
-    /// <param name="pathToFile"></param>
-    /// <returns></returns>
-    public KeyValuePair<string, string>[] Get(string pathToFile)
+    public class TextKeyValueFileProvider : IKeyValueFileProvider
     {
+        /// <summary>
+        /// Retrieves string Keys and Values stored in a .txt Text File.
+        /// </summary>
+        /// <param name="pathToFile"></param>
+        /// <returns></returns>
+        public KeyValuePair<string, string>[] Get(string pathToFile)
+        {
             List<KeyValuePair<string, string>> list = new List<KeyValuePair<string, string>>();
 
             string text = File.ReadAllText(pathToFile);
@@ -53,15 +53,15 @@ public class TextKeyValueFileProvider : IKeyValueFileProvider
             }
 
             return list.ToArray();
-    }
+        }
 
-    /// <summary>
-    /// Writes the specified data to a .txt Text file.
-    /// </summary>
-    /// <param name="data"></param>
-    /// <param name="pathToFile"></param>
-    public void WriteToFile(KeyValuePair<string, string>[] data, string pathToFile)
-    {
+        /// <summary>
+        /// Writes the specified data to a .txt Text file.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="pathToFile"></param>
+        public void WriteToFile(KeyValuePair<string, string>[] data, string pathToFile)
+        {
             StringBuilder stringBuilder = new StringBuilder();
 
             foreach (KeyValuePair<string, string> pair in data)
@@ -70,5 +70,6 @@ public class TextKeyValueFileProvider : IKeyValueFileProvider
             }
             
             File.WriteAllText(pathToFile, stringBuilder.ToString());
+        }
     }
 }

@@ -17,14 +17,15 @@
 
 using System.Collections.Generic;
 
-namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders.Abstractions;
-
-/// <summary>
-/// An interface for file providers of KeyValue files.
-/// </summary>
-public interface IKeyValueFileProvider
+namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders.Abstractions
 {
-    KeyValuePair<string, string>[] Get(string pathToFile);
+    /// <summary>
+    /// An interface for file providers of KeyValue files.
+    /// </summary>
+    public interface IKeyValueFileProvider
+    {
+        KeyValuePair<string, string>[] Get(string pathToFile);
 
-    void WriteToFile(KeyValuePair<string, string>[] data, string pathToFile);
+        void WriteToFile(KeyValuePair<string, string>[] data, string pathToFile);
+    }
 }
