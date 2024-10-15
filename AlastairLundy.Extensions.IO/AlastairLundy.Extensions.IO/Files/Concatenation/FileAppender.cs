@@ -22,9 +22,6 @@ using System.Linq;
 
 using AlastairLundy.Extensions.IO.Localizations;
 
-using NLine.Library;
-using NLine.Library.Abstractions;
-
 // ReSharper disable RedundantIfElseBlock
 
 namespace AlastairLundy.Extensions.IO.Files.Concatenation
