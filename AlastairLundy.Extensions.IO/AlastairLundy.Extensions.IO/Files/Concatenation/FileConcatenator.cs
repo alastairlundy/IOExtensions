@@ -23,16 +23,14 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
 {
     public static class FileConcatenator
     {
-    
         /// <summary>
         /// 
         /// </summary>
         /// <param name="files">The files to be concatenated.</param>
-        /// <param name="addLineNumbers">Whether to add line numbers to the files.</param>
         /// <returns></returns>
-        public static IEnumerable<string> ConcatenateFilesToStringEnumerable(IEnumerable<string> files, bool addLineNumbers)
+        public static IEnumerable<string> ConcatenateFilesToStringEnumerable(IEnumerable<string> files)
         {
-            FileAppender fileAppender = new FileAppender(addLineNumbers);
+            FileAppender fileAppender = new FileAppender();
             fileAppender.AppendFiles(files);
 
             return fileAppender.ToEnumerable();
@@ -54,11 +52,11 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
 
                 if (filePath.Contains(newFileName) == false)
                 {
-                    File.WriteAllLines(newFile, ConcatenateFilesToStringEnumerable(files, addLineNumbers));
+                    File.WriteAllLines(newFile, ConcatenateFilesToStringEnumerable(files));
                 }
                 else
                 {
-                    File.WriteAllLines(newFileName, ConcatenateFilesToStringEnumerable(files, addLineNumbers));
+                    File.WriteAllLines(newFileName, ConcatenateFilesToStringEnumerable(files));
                 }
 
             }

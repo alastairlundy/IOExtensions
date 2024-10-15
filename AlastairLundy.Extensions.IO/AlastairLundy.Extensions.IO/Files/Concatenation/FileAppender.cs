@@ -35,45 +35,21 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
     public class FileAppender
     {
         protected List<string> AppendedFileContents;
-    
-        public bool AddLineNumbers { get; protected set; }
-    
+        
         protected IFileFinder fileFinder;
-        protected ILineNumberer lineNumberer;
     
         public FileAppender()
         {
             AppendedFileContents = new List<string>();
-            AddLineNumbers = false;
             fileFinder = new FileFinder();
-            lineNumberer = new LineNumberer();
-        }
-    
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="addLineNumbers">Adds line numbers to the appended file contents.</param>
-        public FileAppender(bool addLineNumbers)
-        {
-            this.fileFinder = new FileFinder();
-            this.lineNumberer = new LineNumberer();
-            AppendedFileContents = new List<string>();
-            AddLineNumbers = addLineNumbers;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fileFinder"></param>
-        /// <param name="addLineNumbers">Adds line numbers to the appended file contents.</param>
-        public FileAppender(bool addLineNumbers, IFileFinder fileFinder, ILineNumberer lineNumberer)
+        public FileAppender(IFileFinder fileFinder)
         {
             this.fileFinder = fileFinder;
-            this.lineNumberer = lineNumberer;
             AppendedFileContents = new List<string>();
-            AddLineNumbers = addLineNumbers;
         }
-    
+        
         /// <summary>
         /// Attempts to append the contents of a file to an existing list.
         /// </summary>
@@ -151,12 +127,7 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
             try
             {
                 string[] fileContentsArray = fileContents as string[] ?? fileContents.ToArray();
-            
-                if (AddLineNumbers)
-                {
-                    fileContentsArray = lineNumberer.AddLineNumbers(fileContentsArray, ". ").ToArray();
-                }
-
+                
                 foreach (string str in fileContentsArray)
                 {
                     AppendedFileContents.Add(str);

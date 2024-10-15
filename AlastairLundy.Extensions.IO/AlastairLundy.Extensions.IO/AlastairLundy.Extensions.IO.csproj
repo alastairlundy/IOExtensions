@@ -34,7 +34,6 @@
     
     <ItemGroup>
       <PackageReference Include="AlastairLundy.Extensions.System" Version="5.*" />
-        <PackageReference Include="NLine.Library" Version="2.*" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
