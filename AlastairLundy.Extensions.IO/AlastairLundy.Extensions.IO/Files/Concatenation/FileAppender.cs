@@ -1,7 +1,6 @@
 ﻿/*
-
-    BasisBox - ConCat Library
-    Copyright (C) 2024 Alastair Lundy
+    IOExtensions 
+    Copyright (c) 2024 Alastair Lundy
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -23,6 +22,7 @@ using System.Linq;
 
 using AlastairLundy.Extensions.IO.Files.Abstractions;
 using AlastairLundy.Extensions.IO.Localizations;
+
 using NLine.Library;
 using NLine.Library.Abstractions;
 
