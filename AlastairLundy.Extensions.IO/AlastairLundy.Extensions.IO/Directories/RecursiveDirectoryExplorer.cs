@@ -22,8 +22,8 @@ using AlastairLundy.Extensions.IO.Directories.Abstractions;
 using AlastairLundy.Extensions.IO.Directories.Extensions;
 
 using AlastairLundy.Extensions.IO.Localizations;
-
 using AlastairLundy.Extensions.System;
+
 
 namespace AlastairLundy.Extensions.IO.Directories
 {

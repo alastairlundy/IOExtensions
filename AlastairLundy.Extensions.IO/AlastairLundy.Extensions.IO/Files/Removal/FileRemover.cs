@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.IO;
 
 using System.Linq;
+
 using AlastairLundy.Extensions.IO.Files.Abstractions;
 
 using AlastairLundy.Extensions.IO.Localizations;

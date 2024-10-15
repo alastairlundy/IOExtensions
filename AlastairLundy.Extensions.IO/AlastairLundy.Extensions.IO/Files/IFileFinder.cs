@@ -15,7 +15,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-namespace AlastairLundy.Extensions.IO.Files.Abstractions
+namespace AlastairLundy.Extensions.IO.Files
 {
     public interface IFileFinder
     {
