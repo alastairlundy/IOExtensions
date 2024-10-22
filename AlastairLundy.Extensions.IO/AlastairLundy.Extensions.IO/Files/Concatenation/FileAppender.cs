@@ -44,7 +44,7 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
 
         public FileAppender(IFileFinder fileFinder)
         {
-            this._fileFinder = fileFinder;
+            _fileFinder = fileFinder;
             _appendedFileContents = new List<string>();
         }
         
