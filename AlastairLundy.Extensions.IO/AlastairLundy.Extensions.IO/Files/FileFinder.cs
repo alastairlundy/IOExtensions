@@ -16,7 +16,6 @@
  */
 
 using System.IO;
-using AlastairLundy.Extensions.IO.Files.Abstractions;
 
 namespace AlastairLundy.Extensions.IO.Files
 {
@@ -47,7 +46,6 @@ namespace AlastairLundy.Extensions.IO.Files
                             return true;
                         }
 #else
-                        // Uses new .NET 6 and newer ^ Index
                         if (filePath[filePath.Length - 4].Equals('.'))
                         {
                             return true;
@@ -63,7 +61,6 @@ namespace AlastairLundy.Extensions.IO.Files
                             return true;
                         }
 #else
-                        // Uses new .NET 6 and newer ^ Index
                         if (filePath[filePath.Length - 3].Equals('.') || filePath[filePath.Length - 2].Equals('.'))
                         {
                             return true;
@@ -80,7 +77,6 @@ namespace AlastairLundy.Extensions.IO.Files
                             return true;
                         }
 #else
-                        // Uses new .NET 6 and newer ^ Index
                         if (filePath[filePath.Length - 2].Equals('.'))
                         {
                             return true;
