@@ -51,7 +51,7 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
         /// Attempts to append the contents of a file to an existing list.
         /// </summary>
         /// <param name="fileToBeAppended">The file to have its contents appended to the existing file contents. If no existing file contents exists, this will become the contents appended to in the future.</param>
-        /// <returns>true if the files where successfully appended; returns false otherwise.</returns>
+        /// <returns>true if the file was successfully appended; returns false otherwise.</returns>
         public bool TryAppendFile(string fileToBeAppended)
         {
             try
