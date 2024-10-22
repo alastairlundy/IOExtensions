@@ -23,7 +23,7 @@ using AlastairLundy.Extensions.IO.Directories.Extensions;
 
 using AlastairLundy.Extensions.IO.Localizations;
 
-using AlastairLundy.Extensions.System;
+using AlastairLundy.Extensions.Collections.Specializations.Bools;
 
 
 namespace AlastairLundy.Extensions.IO.Directories

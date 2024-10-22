@@ -31,10 +31,6 @@
     <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
         <Nullable>enable</Nullable>
     </PropertyGroup>
-    
-    <ItemGroup>
-      <PackageReference Include="AlastairLundy.Extensions.System" Version="5.*" />
-    </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
         <PackageReference Include="PlatformKit.Extensions.OperatingSystem" Version="1.*" />
@@ -73,6 +69,10 @@
           <PackagePath>LICENSE.txt</PackagePath>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AlastairLundy.Extensions.Collections" Version="5.*" />
     </ItemGroup>
 
 </Project>
