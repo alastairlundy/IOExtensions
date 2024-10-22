@@ -44,7 +44,7 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
         /// <param name="files">The files to be concatenated.</param>
         /// <param name="addLineNumbers">Whether to add line numbers to the files.</param>
         /// <exception cref="Exception">Thrown </exception>
-        public static void ConcatenateFilesToNewFile(string filePath, string newFileName, IEnumerable<string> files, bool addLineNumbers)
+        public static void ConcatenateFilesToNewFile(string filePath, string newFileName, IEnumerable<string> files)
         {
             try
             {
