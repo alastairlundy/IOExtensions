@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+using System.Text.Json;
+
 using AlastairLundy.Extensions.IO.Providers.KeyValueProviders.Abstractions;
 
 namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders
@@ -36,34 +38,23 @@ namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders
         /// <returns></returns>
         public KeyValuePair<string, string>[] Get(string pathToFile)
         {
-                List<KeyValuePair<string, string>> list = new List<KeyValuePair<string, string>>();
+            try
+            {
+                JsonDocument jsonDocument = JsonDocument.Parse(File.ReadAllText(pathToFile));
 
-                string jsonText = File.ReadAllText(pathToFile);
+                KeyValuePair<string, string>[]? data = jsonDocument.Deserialize<KeyValuePair<string, string>[]>();
 
-                jsonText = jsonText.Replace('"', '}');
-                jsonText = jsonText.Replace("{", string.Empty);
-                jsonText = jsonText.Replace("}", string.Empty);
-                jsonText = jsonText.Replace(",", string.Empty);
-                jsonText = jsonText.Replace("'", string.Empty);
-
-#if NET6_0_OR_GREATER
-                string[] lines = jsonText.Split(Environment.NewLine);
-#else
-                string[] lines = jsonText.Replace(" ", String.Empty).Split(Environment.NewLine.ToCharArray());
-#endif
-
-                foreach (string line in lines)
+                if (data == null)
                 {
-                    string newLine = line.Replace(" ", string.Empty);
-                    string[] splitLine = newLine.Split(':');
-
-                    if (splitLine.Length > 1)
-                    {
-                        list.Add(new KeyValuePair<string, string>(splitLine[0], splitLine[1]));
-                    }
+                    throw new NullReferenceException($"{nameof(data)} is null");
                 }
 
-                return list.ToArray();
+                return data;  
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
         }
 
         /// <summary>
