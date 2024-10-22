@@ -1,0 +1,41 @@
+﻿/*
+    IOExtensions 
+    Copyright (c) 2024 Alastair Lundy
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, version 3 of the License.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+using System.Collections.Generic;
+using System.Linq;
+
+namespace AlastairLundy.Extensions.IO.Files.Concatenation.Abstractions
+{
+    public interface IFileAppender
+    {
+        void AppendFile(string fileToBeAppended);
+        bool TryAppendFile(string fileToBeAppended);
+        
+        void AppendFiles(IOrderedEnumerable<string> filesToBeAppended);
+        void AppendFiles(IEnumerable<string> filesToBeAppended);
+
+        void AppendFileContents(IEnumerable<string> fileContents);
+        
+        bool TryAppendFileContents(IEnumerable<string> fileContents);
+        bool TryAppendFiles(IEnumerable<string> filesToBeAppended);
+
+        IEnumerable<string> ToEnumerable();
+
+        void WriteToFile(string filePath);
+
+    }
+}
