@@ -39,7 +39,7 @@ namespace AlastairLundy.Extensions.IO.Files
                 {
                     if (filePath.Length - 4 >= 0 && filePath.Length - 4 < filePath.Length)
                     {
-#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER || NETSTANDARD2_1
                         // Uses new .NET 6 and newer ^ Index
                         if (filePath[^4].Equals('.'))
                         {
@@ -54,7 +54,7 @@ namespace AlastairLundy.Extensions.IO.Files
                     }
                     if (filePath.Length - 3 >= 0 && filePath.Length - 3 < filePath.Length)
                     {
-#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER || NETSTANDARD2_1
                         // Uses new .NET 6 and newer ^ Index
                         if (filePath[^3].Equals('.') || filePath[^2].Equals('.'))
                         {
@@ -70,7 +70,7 @@ namespace AlastairLundy.Extensions.IO.Files
 
                     if (filePath.Length - 2 >= 0 && filePath.Length - 2 < filePath.Length)
                     {
-#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER || NETSTANDARD2_1
                         // Uses new .NET 6 and newer ^ Index
                         if (filePath[^2].Equals('.'))
                         {
