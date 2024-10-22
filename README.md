@@ -10,7 +10,6 @@
 * Support for appending files
 * Support for concatening files
 * Support for parsing and converting Unix File Permission notations
-* Support for reading KeyValue Pairs from Json Files, XML files, ResX Resource files, and TXT files as well as an interface to allow for creating other implementations.
 
 ## Support 
 This can be added to any .NET Standard 2.0, .NET Standard 2.1, or .NET 8 compatible Application or Library.
