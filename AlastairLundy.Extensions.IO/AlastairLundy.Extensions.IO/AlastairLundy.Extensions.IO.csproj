@@ -39,11 +39,11 @@
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-        <PackageReference Include="PlatformKit.Extensions.OperatingSystem" Version="1.*" />
+        <PackageReference Include="PlatformKit.Extensions.OperatingSystem" Version="[1.5.0,)" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
-        <PackageReference Include="PlatformKit.Extensions.OperatingSystem" Version="1.*" />
+        <PackageReference Include="PlatformKit.Extensions.OperatingSystem" Version="[1.5.0,)" />
     </ItemGroup>
 
 
@@ -78,7 +78,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AlastairLundy.Extensions.Collections" Version="5.*" />
+      <PackageReference Include="AlastairLundy.Extensions.Collections" Version="[5.4.0,)" />
     </ItemGroup>
 
 </Project>
