@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AlastairLundy.Extensions.IO.Files.Abstractions
+namespace AlastairLundy.Extensions.IO.Files.Removal.Abstractions
 {
     public interface IFileRemover
     {
