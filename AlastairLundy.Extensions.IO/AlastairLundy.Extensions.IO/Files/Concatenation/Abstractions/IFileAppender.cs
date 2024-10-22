@@ -34,6 +34,8 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation.Abstractions
         bool TryAppendFiles(IEnumerable<string> filesToBeAppended);
 
         IEnumerable<string> ToEnumerable();
+        string[] ToArray();
+        List<string> ToList();
 
         void WriteToFile(string filePath);
 

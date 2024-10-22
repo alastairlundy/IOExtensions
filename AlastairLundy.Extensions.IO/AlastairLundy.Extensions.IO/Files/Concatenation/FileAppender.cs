@@ -174,10 +174,28 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
         }
 
         /// <summary>
-        /// Returns the appended contents to an IEnumerable.
+        /// Returns the appended contents as an IEnumerable.
         /// </summary>
         /// <returns>the list of appended strings as an enumerable.</returns>
         public IEnumerable<string> ToEnumerable()
+        {
+            return _appendedFileContents;
+        }
+
+        /// <summary>
+        /// Returns the appended contents as an array of strings.
+        /// </summary>
+        /// <returns>the array of appended strings.</returns>
+        public string[] ToArray()
+        {
+            return ToList().ToArray();
+        }
+
+        /// <summary>
+        /// Returns the appended contents as a list of strings.
+        /// </summary>
+        /// <returns>the list of appended strings.</returns>
+        public List<string> ToList()
         {
             return _appendedFileContents;
         }
