@@ -138,7 +138,7 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
         }
 
         /// <summary>
-        /// 
+        /// Attempts to append file contents to the existing file contents.
         /// </summary>
         /// <param name="fileContents">The file contents to be appended to the existing file contents. If no existing file contents exists, this will become the contents appended to in the future.</param>
         /// <returns>true if the file contents was successfully appended; returns false otherwise.</returns>
