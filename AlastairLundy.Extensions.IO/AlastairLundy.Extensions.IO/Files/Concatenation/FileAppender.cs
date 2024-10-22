@@ -28,7 +28,7 @@ using AlastairLundy.Extensions.IO.Localizations;
 namespace AlastairLundy.Extensions.IO.Files.Concatenation
 {
     /// <summary>
-    /// 
+    /// A class to append the contents of files.
     /// </summary>
     public class FileAppender : IFileAppender
     {
