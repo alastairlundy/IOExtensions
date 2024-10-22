@@ -1,5 +1,5 @@
 /*
-    IOExtensions 
+    KeyValueProvider IO Extensions
     Copyright (c) 2024 Alastair Lundy
 
     This program is free software: you can redistribute it and/or modify
@@ -20,14 +20,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-using AlastairLundy.Extensions.IO.Providers.KeyValueProviders.Abstractions;
-
-namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders
+namespace AlastairLundy.Extensions.IO.KeyValueProviders.Providers.Strings
 {
     /// <summary>
     /// A class to read and write KeyValue Pairs to/from Text files.
     /// </summary>
-    public class TextKeyValueFileProvider : IKeyValueFileProvider
+    public class TextKeyValueFileProvider : IStringKeyValueFileProvider
     {
         /// <summary>
         /// Retrieves string Keys and Values stored in a .txt Text File.

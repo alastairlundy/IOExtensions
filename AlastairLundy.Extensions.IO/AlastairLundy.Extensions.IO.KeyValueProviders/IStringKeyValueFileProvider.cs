@@ -1,5 +1,5 @@
 ﻿/*
-    IOExtensions 
+    KeyValueProvider IO Extensions
     Copyright (c) 2024 Alastair Lundy
 
     This program is free software: you can redistribute it and/or modify
@@ -17,12 +17,9 @@
 
 using System.Collections.Generic;
 
-namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders.Abstractions
+namespace AlastairLundy.Extensions.IO.KeyValueProviders
 {
-    /// <summary>
-    /// An interface for file providers of KeyValue files.
-    /// </summary>
-    public interface IKeyValueFileProvider
+    public interface IStringKeyValueFileProvider
     {
         KeyValuePair<string, string>[] Get(string pathToFile);
 

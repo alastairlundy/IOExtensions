@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlastairLundy.Extensions.IO", "AlastairLundy.Extensions.IO\AlastairLundy.Extensions.IO.csproj", "{C393B054-2FF1-41A7-930E-89A3D2D9C2C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlastairLundy.Extensions.IO.KeyValueProviders", "AlastairLundy.Extensions.IO.KeyValueProviders\AlastairLundy.Extensions.IO.KeyValueProviders.csproj", "{C7DCF3CE-55D3-4F13-A6C2-76D640B25570}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{C393B054-2FF1-41A7-930E-89A3D2D9C2C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C393B054-2FF1-41A7-930E-89A3D2D9C2C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C393B054-2FF1-41A7-930E-89A3D2D9C2C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7DCF3CE-55D3-4F13-A6C2-76D640B25570}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7DCF3CE-55D3-4F13-A6C2-76D640B25570}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7DCF3CE-55D3-4F13-A6C2-76D640B25570}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7DCF3CE-55D3-4F13-A6C2-76D640B25570}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

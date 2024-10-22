@@ -1,5 +1,5 @@
 /*
-    IOExtensions 
+    KeyValueProvider IO Extensions
     Copyright (c) 2024 Alastair Lundy
 
     This program is free software: you can redistribute it and/or modify
@@ -21,14 +21,12 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Resources;
 
-using AlastairLundy.Extensions.IO.Providers.KeyValueProviders.Abstractions;
-
-namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders
+namespace AlastairLundy.Extensions.IO.KeyValueProviders.Providers.Strings
 {
     /// <summary>
     /// A class to read and write KeyValue pairs to/from Resource files.
     /// </summary>
-    public class ResourceKeyValueFileProvider : IKeyValueFileProvider
+    public class ResourceKeyValueFileProvider : IStringKeyValueFileProvider
     {
         /// <summary>
         /// Retrieves string Keys and Values stored in a Resource File.
@@ -58,7 +56,7 @@ namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders
             ResourceManager resourceManager = new ResourceManager(baseName, Assembly.GetEntryAssembly() ?? throw new NullReferenceException("Entry Assembly was null."));
             
             ResourceReader reader = new ResourceReader(resourceManager.GetStream(pathToFile) ?? throw new NullReferenceException());
-
+            
             IDictionaryEnumerator readerEnumerator = reader.GetEnumerator();
             
             while (readerEnumerator.MoveNext())

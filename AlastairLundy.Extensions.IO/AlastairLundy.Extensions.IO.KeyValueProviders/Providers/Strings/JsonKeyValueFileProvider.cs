@@ -1,5 +1,5 @@
 ﻿/*
-    IOExtensions 
+    KeyValueProvider IO Extensions
     Copyright (c) 2024 Alastair Lundy
 
     This program is free software: you can redistribute it and/or modify
@@ -19,15 +19,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.Json;
 
-using AlastairLundy.Extensions.IO.Providers.KeyValueProviders.Abstractions;
-
-namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders
+namespace AlastairLundy.Extensions.IO.KeyValueProviders.Providers.Strings
 {
     /// <summary>
     /// A class to read and write KeyValue pairs to/from JSON files.
     /// </summary>
-    public class JsonKeyValueFileProvider : IKeyValueFileProvider
+    public class JsonKeyValueFileProvider : IStringKeyValueFileProvider
     {
         /// <summary>
         /// Retrieves string Keys and Values stored in a Json File.
@@ -36,34 +35,27 @@ namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders
         /// <returns></returns>
         public KeyValuePair<string, string>[] Get(string pathToFile)
         {
-                List<KeyValuePair<string, string>> list = new List<KeyValuePair<string, string>>();
+            try
+            {
+                JsonDocument jsonDocument = JsonDocument.Parse(File.ReadAllText(pathToFile));
 
-                string jsonText = File.ReadAllText(pathToFile);
-
-                jsonText = jsonText.Replace('"', '}');
-                jsonText = jsonText.Replace("{", string.Empty);
-                jsonText = jsonText.Replace("}", string.Empty);
-                jsonText = jsonText.Replace(",", string.Empty);
-                jsonText = jsonText.Replace("'", string.Empty);
-
-#if NET6_0_OR_GREATER
-                string[] lines = jsonText.Split(Environment.NewLine);
-#else
-                string[] lines = jsonText.Replace(" ", String.Empty).Split(Environment.NewLine.ToCharArray());
+#if NETSTANDARD2_1 || NET6_0_OR_GREATER
+                KeyValuePair<string, string>[]? data = jsonDocument.Deserialize<KeyValuePair<string, string>[]>();
+#elif NETSTANDARD2_0
+                KeyValuePair<string, string>[] data = jsonDocument.Deserialize<KeyValuePair<string, string>[]>();
 #endif
 
-                foreach (string line in lines)
+                if (data == null)
                 {
-                    string newLine = line.Replace(" ", string.Empty);
-                    string[] splitLine = newLine.Split(':');
-
-                    if (splitLine.Length > 1)
-                    {
-                        list.Add(new KeyValuePair<string, string>(splitLine[0], splitLine[1]));
-                    }
+                    throw new NullReferenceException($"{nameof(data)} is null");
                 }
 
-                return list.ToArray();
+                return data;  
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
         }
 
         /// <summary>
@@ -73,6 +65,8 @@ namespace AlastairLundy.Extensions.IO.Providers.KeyValueProviders
         /// <param name="pathToFile"></param>
         public void WriteToFile(KeyValuePair<string, string>[] data, string pathToFile)
         {
+            string json = JsonSerializer.Serialize(data);
+            
             StringBuilder stringBuilder = new StringBuilder();
 
             stringBuilder.Append('{');
