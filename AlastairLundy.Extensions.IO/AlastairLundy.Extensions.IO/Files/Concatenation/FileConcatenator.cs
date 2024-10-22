@@ -62,10 +62,10 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
         /// <summary>
         /// Concatenates the contents of specified files and saves it to a new file.
         /// </summary>
-        /// <param name="filePath"></param>
-        /// <param name="newFileName"></param>
+        /// <param name="filePath">The path to save the new file to.</param>
+        /// <param name="newFileName">The name of the new file to be created.</param>
         /// <param name="files">The files to be concatenated.</param>
-        /// <exception cref="Exception">Thrown </exception>
+        /// <exception cref="Exception">Thrown if an exception occurs when trying to save the file.</exception>
         public static void ConcatenateFilesToNewFile(string filePath, string newFileName, IEnumerable<string> files)
         {
             try
