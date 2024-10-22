@@ -31,20 +31,20 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
     /// </summary>
     public class FileAppender
     {
-        protected List<string> AppendedFileContents;
+        protected List<string> _appendedFileContents;
         
-        protected IFileFinder fileFinder;
+        protected IFileFinder _fileFinder;
     
         public FileAppender()
         {
-            AppendedFileContents = new List<string>();
-            fileFinder = new FileFinder();
+            _appendedFileContents = new List<string>();
+            _fileFinder = new FileFinder();
         }
 
         public FileAppender(IFileFinder fileFinder)
         {
-            this.fileFinder = fileFinder;
-            AppendedFileContents = new List<string>();
+            this._fileFinder = fileFinder;
+            _appendedFileContents = new List<string>();
         }
         
         /// <summary>
@@ -74,7 +74,7 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
         /// <exception cref="FileNotFoundException">Thrown if the file specified is not found.</exception>
         public void AppendFile(string fileToBeAppended)
         {
-            if (fileFinder.IsAFile(fileToBeAppended) || File.Exists(fileToBeAppended))
+            if (_fileFinder.IsAFile(fileToBeAppended) || File.Exists(fileToBeAppended))
             {
                 try
                 {
@@ -127,7 +127,7 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
                 
                 foreach (string str in fileContentsArray)
                 {
-                    AppendedFileContents.Add(str);
+                    _appendedFileContents.Add(str);
                 }
             }
             catch (Exception exception)
@@ -142,7 +142,7 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
         /// <returns>the list of appended strings as an enumerable.</returns>
         public IEnumerable<string> ToEnumerable()
         {
-            return AppendedFileContents;
+            return _appendedFileContents;
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
         /// <exception cref="Exception">Thrown if an exception occurs when attempting to write the file.</exception>
         public void WriteToFile(string filePath)
         {
-            if (fileFinder.IsAFile(filePath))
+            if (_fileFinder.IsAFile(filePath))
             {
                 try
                 {
@@ -163,7 +163,7 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
                         File.Delete(filePath);
                     }
 
-                    File.WriteAllLines(filePath, AppendedFileContents);
+                    File.WriteAllLines(filePath, _appendedFileContents);
                 }
                 catch (FileNotFoundException exception)
                 {
