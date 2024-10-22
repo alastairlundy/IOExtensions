@@ -21,28 +21,50 @@ using System.IO;
 
 namespace AlastairLundy.Extensions.IO.Files.Concatenation
 {
+    /// <summary>
+    /// Syntactic sugar around the FileAppender class.
+    /// </summary>
     public static class FileConcatenator
     {
         /// <summary>
-        /// 
+        /// Concatenated the contents of files in the style of the Unix Cat command.
         /// </summary>
         /// <param name="files">The files to be concatenated.</param>
-        /// <returns></returns>
-        public static IEnumerable<string> ConcatenateFilesToStringEnumerable(IEnumerable<string> files)
+        /// <returns>the concatenated files as an IEnumerable of strings.</returns>
+        public static IEnumerable<string> ConcatenateFilesToEnumerable(IEnumerable<string> files)
+        {
+            return ConcatenateFilesToArray(files);
+        }
+
+        /// <summary>
+        /// Concatenated the contents of files in the style of the Unix Cat command.
+        /// </summary>
+        /// <param name="files">The files to be concatenated.</param>
+        /// <returns>the concatenated files as an array of strings.</returns>
+        public static string[] ConcatenateFilesToArray(IEnumerable<string> files)
+        {
+            return ConcatenateFilesToList(files).ToArray();
+        }
+
+        /// <summary>
+        /// Concatenated the contents of files in the style of the Unix Cat command.
+        /// </summary>
+        /// <param name="files">The files to be concatenated.</param>
+        /// <returns>the concatenated files as a list of strings.</returns>
+        public static List<string> ConcatenateFilesToList(IEnumerable<string> files)
         {
             FileAppender fileAppender = new FileAppender();
             fileAppender.AppendFiles(files);
 
-            return fileAppender.ToEnumerable();
+            return fileAppender.ToList();
         }
-
+        
         /// <summary>
         /// Concatenates the contents of specified files and saves it to a new file.
         /// </summary>
         /// <param name="filePath"></param>
         /// <param name="newFileName"></param>
         /// <param name="files">The files to be concatenated.</param>
-        /// <param name="addLineNumbers">Whether to add line numbers to the files.</param>
         /// <exception cref="Exception">Thrown </exception>
         public static void ConcatenateFilesToNewFile(string filePath, string newFileName, IEnumerable<string> files)
         {
@@ -52,11 +74,11 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
 
                 if (filePath.Contains(newFileName) == false)
                 {
-                    File.WriteAllLines(newFile, ConcatenateFilesToStringEnumerable(files));
+                    File.WriteAllLines(newFile, ConcatenateFilesToEnumerable(files));
                 }
                 else
                 {
-                    File.WriteAllLines(newFileName, ConcatenateFilesToStringEnumerable(files));
+                    File.WriteAllLines(newFileName, ConcatenateFilesToEnumerable(files));
                 }
 
             }
