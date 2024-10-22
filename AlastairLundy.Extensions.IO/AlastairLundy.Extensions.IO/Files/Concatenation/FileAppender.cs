@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+using AlastairLundy.Extensions.IO.Files.Concatenation.Abstractions;
 using AlastairLundy.Extensions.IO.Localizations;
 
 // ReSharper disable RedundantIfElseBlock
@@ -29,7 +30,7 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
     /// <summary>
     /// 
     /// </summary>
-    public class FileAppender
+    public class FileAppender : IFileAppender
     {
         protected List<string> _appendedFileContents;
         
@@ -133,6 +134,42 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
             catch (Exception exception)
             {
                 throw new Exception(exception.Message, exception);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileContents">The file contents to be appended to the existing file contents. If no existing file contents exists, this will become the contents appended to in the future.</param>
+        /// <returns>true if the file contents was successfully appended; returns false otherwise.</returns>
+        public bool TryAppendFileContents(IEnumerable<string> fileContents)
+        {
+            try
+            {
+                AppendFileContents(fileContents);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Attempts to append the contents of files to an existing list.
+        /// </summary>
+        /// <param name="filesToBeAppended">The files to be appended to the existing file contents. If no existing file contents exists, this will become the contents appended to in the future.</param>
+        /// <returns>true if the files were successfully appended; returns false otherwise.</returns>
+        public bool TryAppendFiles(IEnumerable<string> filesToBeAppended)
+        {
+            try
+            {
+                AppendFiles(filesToBeAppended);
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
