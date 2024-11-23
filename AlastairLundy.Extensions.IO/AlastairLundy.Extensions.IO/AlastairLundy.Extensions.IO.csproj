@@ -4,6 +4,7 @@
         <ImplicitUsings>disable</ImplicitUsings>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Version>1.2.0</Version>
+        <PackageVersion>1.2.0</PackageVersion>
         <Title>AlastairLundy.Extensions.IO</Title>
         <Authors>AlastairLundy</Authors>
         <Copyright>Copyright (c) Alastair Lundy 2024</Copyright>
