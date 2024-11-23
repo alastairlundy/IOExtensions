@@ -113,11 +113,16 @@ namespace AlastairLundy.Extensions.IO.Directories
 #if NET6_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
                     string parentDirectory = Directory.GetParent(directory)!.FullName;
 #else
-                    string parentDirectory = parentDirectory = Directory.GetParent(directory)?.FullName;
+                    string parentDirectory = Directory.GetParent(directory)?.FullName;
 #endif
 
                     try
                     {
+                        if (parentDirectory == null)
+                        {
+                            throw new NullReferenceException(Resources.Exceptions_DirectoryNotFound.Replace("{x}", directory));        
+                        }
+
                         Directory.Delete(parentDirectory);
                         DirectoryDeleted?.Invoke(this, Resources.Directory_Deleted.Replace("{x}", parentDirectory));
                     }
