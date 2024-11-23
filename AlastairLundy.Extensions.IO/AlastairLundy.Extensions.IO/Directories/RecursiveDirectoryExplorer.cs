@@ -9,14 +9,12 @@
 
 using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
 using AlastairLundy.Extensions.IO.Directories.Abstractions;
 using AlastairLundy.Extensions.IO.Directories.Extensions;
 
 using AlastairLundy.Extensions.IO.Localizations;
-
-using AlastairLundy.Extensions.Collections.Specializations.Bools;
-
+// ReSharper disable RedundantBoolCompare
 
 namespace AlastairLundy.Extensions.IO.Directories
 {
@@ -63,7 +61,7 @@ namespace AlastairLundy.Extensions.IO.Directories
                 }
             }
 
-            return allowRecursiveEmptyDirectoryDeletion.IsAllTrue();
+            return allowRecursiveEmptyDirectoryDeletion.All(x => x == true);
         }
     
         /// <summary>
