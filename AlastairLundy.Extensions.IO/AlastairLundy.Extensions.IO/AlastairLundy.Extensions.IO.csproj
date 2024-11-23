@@ -9,6 +9,9 @@
         <Copyright>Copyright (c) Alastair Lundy 2024</Copyright>
         <RepositoryUrl>https://github.com/AlastairLundy/IOExtensions</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackOnBuild>true</PackOnBuild>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Description>A library to make programmatic directory deletion and creation in .NET easier.</Description>
         <PackageReleaseNotes>### Changes since 1.0.x
@@ -24,7 +27,14 @@
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <TargetFrameworks>net8.0;netstandard2.1;netstandard2.0</TargetFrameworks>
+        <IncludeContentInPack>true</IncludeContentInPack>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
     </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
+    </ItemGroup>
+
 
     <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
         <Nullable>disable</Nullable>
