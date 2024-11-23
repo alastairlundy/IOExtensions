@@ -7,7 +7,10 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+#if NET6_0_OR_GREATER
 using System;
+#endif
+
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -15,7 +18,7 @@ using System.Text;
 using AlastairLundy.Extensions.IO.Directories.Abstractions;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
 namespace AlastairLundy.Extensions.IO.Directories
