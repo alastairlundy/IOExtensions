@@ -15,6 +15,8 @@ using AlastairLundy.Extensions.IO.Directories.Abstractions;
 using AlastairLundy.Extensions.IO.Directories.Extensions;
 
 using AlastairLundy.Extensions.IO.Localizations;
+// ReSharper disable ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
+// ReSharper disable RedundantBoolCompare
 
 namespace AlastairLundy.Extensions.IO.Directories
 {
@@ -62,6 +64,7 @@ namespace AlastairLundy.Extensions.IO.Directories
                 if ((directory.IsDirectoryEmpty() && deleteEmptyDirectory) || !deleteEmptyDirectory)
                 {
                     Directory.Delete(directory);
+                    // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
                     DirectoryDeleted?.Invoke(this, Resources.Directory_Deleted.Replace("{x}", directory));
 
                     if (deleteParentDirectory)
