@@ -3,7 +3,7 @@
     <PropertyGroup>
         <ImplicitUsings>disable</ImplicitUsings>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.1.0</Version>
+        <Version>1.2.0</Version>
         <Title>AlastairLundy.Extensions.IO</Title>
         <Authors>AlastairLundy</Authors>
         <Copyright>Copyright (c) Alastair Lundy 2024</Copyright>
@@ -14,16 +14,12 @@
         <PackOnBuild>true</PackOnBuild>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Description>A library to make programmatic directory deletion and creation in .NET easier.</Description>
-        <PackageReleaseNotes>### Changes since 1.0.x
-* Added ``FileAppender`` class
-* Added ``IFileAppender`` interface
-* Added ``FileConcatenator`` static class - This provides some syntactic sugar around the ``FileAppender`` class.
-* Added .NET Standard 2.0 support
-* Corrected some namespace issues
-* Replaced SystemExtensions dependency with dependency on CollectionExtensions
-
-### Breaking Changes
-* Removed ``IKeyValueFileProvider`` interface and KeyValueFileProvider classes - They are being moved to a new library after being reworked to remove bugs in them. </PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 1.1.0
+* Removed dependency on CollectionsExtensions
+* Replaced OS Extensions depdency with RuntimeExtensions for .NET Standard 2 and 2.1 users
+* Changed license to be MPL 2.0
+* Move KeyValue Providers to separate library
+        * Add SourceLink support</PackageReleaseNotes>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <TargetFrameworks>net8.0;netstandard2.1;netstandard2.0</TargetFrameworks>

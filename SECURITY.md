@@ -14,6 +14,7 @@ No guarantee of support is provided and updates containing fixes are to be made 
 
 | Version | Supported with Bug Fixes | Supported with Security Fixes |
 | ------- | ------------------ |-------------------------------------|
+| 1.2  | Until 1.3 | Until 1.4 | 
 | 1.1  | Until 1.3 | Until 1.4 | 
 | 1.0   | Until 1.2 | Until 1.3 | 
 
