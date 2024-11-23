@@ -15,6 +15,7 @@ using System.Linq;
 using AlastairLundy.Extensions.IO.Files.Removal.Abstractions;
 
 using AlastairLundy.Extensions.IO.Localizations;
+// ReSharper disable ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
 
 namespace AlastairLundy.Extensions.IO.Files.Removal
 {
