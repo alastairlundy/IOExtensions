@@ -24,9 +24,9 @@ namespace AlastairLundy.Extensions.IO.Files.Concatenation
     /// </summary>
     public class FileAppender : IFileAppender
     {
-        protected List<string> _appendedFileContents;
+        protected readonly List<string> _appendedFileContents;
         
-        protected IFileFinder _fileFinder;
+        private readonly IFileFinder _fileFinder;
     
         public FileAppender()
         {
