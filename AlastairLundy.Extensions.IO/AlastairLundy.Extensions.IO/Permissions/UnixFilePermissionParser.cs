@@ -7,16 +7,18 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+#if NET6_0_OR_GREATER
 using System;
 using System.IO;
 
 using AlastairLundy.Extensions.IO.Localizations;
+#endif
 
 namespace AlastairLundy.Extensions.IO.Permissions
 {
     public static class UnixFilePermissionParser
     {
-#if NET8_0_OR_GREATER
+#if NET6_0_OR_GREATER 
     /// <summary>
     /// Parse a Unix file permission in octal notation to a UnixFileMode enum.
     /// </summary>
