@@ -22,10 +22,6 @@ This can be added to any .NET Standard 2.0, .NET Standard 2.1, or .NET 8 compati
 | < 1.1.0                     | .NET Standard 2.1, and .NET 8 |
 
 ## License
-This project is licensed under the LGPLv3 [only] license.
-
-If you distribute a modified version of this library you must make the source code of the modified version available in compliance with the LGPLv3 license.
-
-If you use the original version of this library or a modified version in your application you do not need to make your application open source.
+Versions of this project prior to 1.2.0 are licensed under the LGPLv3 [only] license. 1.2.0 and newer are licensed under the MPL 2.0 license.
 
 This is not legal advice. If you have any questions over licensing please contact an attorney.
