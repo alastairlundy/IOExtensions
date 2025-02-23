@@ -112,8 +112,10 @@ public class PathResolver : IPathResolver
     public string NormalizePath(string path)
     {
         string output = path.Replace("\\", Path.DirectorySeparatorChar.ToString());
-        output = 
-        
+
+
+
+        return output;
     }
 
     public FileModel GetFile(string path)
