@@ -91,29 +91,9 @@ public class PathResolver : IPathResolver
     {
         if (DoesPathExist(path))
         {
-            bool output = false;
-            
             string absolutePath = ToAbsolutePath(path);
             
-            PathType pathType = GetPathType(absolutePath);
-
-            if (pathType == PathType.Directory)
-            {
-                if (Directory.Exists(absolutePath))
-                {
-                    
-                }
-                else
-                {
-                    output = false;
-                }
-            }
-            else
-            {
-                
-            }
-
-            return output;
+            return absolutePath.Equals(path, StringComparison.Ordinal);
         }
 
         throw new ArgumentException("String provided, with value {x}, is not a path".Replace("{x}", path));
