@@ -183,7 +183,13 @@ public class PathResolver : IPathResolver
     
     public FileModel ResolvePathToFile(string path)
     {
+        string absolutePath = ToAbsolutePath(path);
+
+        string fileName = GetFileName(absolutePath);
         
+        FileModel fileModel = new FileModel(fileName);
+        
+        return fileModel;
     }
 
     public string CombinePaths(string path1, string path2)
