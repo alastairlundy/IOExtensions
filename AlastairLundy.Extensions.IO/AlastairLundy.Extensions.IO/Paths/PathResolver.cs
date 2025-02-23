@@ -118,7 +118,11 @@ public class PathResolver : IPathResolver
 
     public FileModel GetFile(string path)
     {
+        string fileName = GetFileName(path);
         
+        FileModel fileModel = new FileModel(fileName);
+        
+        return fileModel;
     }
 
     /// <summary>
