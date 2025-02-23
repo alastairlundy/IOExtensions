@@ -66,7 +66,20 @@ public class PathResolver : IPathResolver
     {
         try
         {
+            bool output;
             
+            PathType pathType = GetPathType(path);
+
+            if (pathType == PathType.Directory)
+            {
+                output = Directory.Exists(path);
+            }
+            else
+            {
+                output = File.Exists(path);
+            }
+
+            return output;
         }
         catch
         {
