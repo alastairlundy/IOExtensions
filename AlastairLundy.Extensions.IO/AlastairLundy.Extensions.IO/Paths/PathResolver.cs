@@ -197,7 +197,12 @@ public class PathResolver : IPathResolver
         {
             StringBuilder stringBuilder = new StringBuilder();
             
-            path2
+            stringBuilder.Append(path1);
+            stringBuilder.Append(Path.DirectorySeparatorChar);
+            stringBuilder.Append(path2);
+            stringBuilder.Append(Path.DirectorySeparatorChar);
+            
+            return stringBuilder.ToString();
         }
     }
 
