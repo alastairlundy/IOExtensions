@@ -142,15 +142,21 @@ public class PathResolver : IPathResolver
     public string GetFileName(string path)
     {
         int indexOfLastDirectorySeparator = path.LastIndexOf(Path.DirectorySeparatorChar);
-
-        if (indexOfLastDirectorySeparator != -1)
-        {
-            
+        
+        string newPath;
+        
+        if (indexOfLastDirectorySeparator == -1)
+        { 
+            newPath = NormalizePath(path);
         }
         else
         {
-            
+            newPath = path;
         }
+        
+        string fileName = newPath.Substring(indexOfLastDirectorySeparator + 1);
+
+        return fileName;
     }
 
     /// <summary>
