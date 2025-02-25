@@ -62,6 +62,11 @@ public class PathResolver : IPathResolver
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
     public bool DoesPathExist(string path)
     {
         try
@@ -132,8 +137,6 @@ public class PathResolver : IPathResolver
     public string NormalizePath(string path)
     {
         string output = path.Replace("\\", Path.DirectorySeparatorChar.ToString());
-
-
 
         return output;
     }
@@ -206,7 +209,11 @@ public class PathResolver : IPathResolver
         }
     }
 
-    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
     public FileModel ResolvePathToFile(string path)
     {
         string absolutePath = ToAbsolutePath(path);
