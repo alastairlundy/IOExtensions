@@ -24,10 +24,12 @@ using AlastairLundy.Extensions.IO.Internal.Localizations;
 
 namespace AlastairLundy.Extensions.IO.Files;
 
-public class FilePathResolver : IFilePathResolver
+public class OldFilePathResolver : IFilePathResolver
 {
     
     /// <summary>
+    /// Resolves the file path to a specific f
+    /// ile if the file path is part of a PATH environment variable.
     /// </summary>
     /// <param name="inputFilePath">The input file path to resolve.</param>
     /// <param name="outputFilePath">The resolved file path if the file path is in the PATH environment variable; the original input file path otherwise.</param>

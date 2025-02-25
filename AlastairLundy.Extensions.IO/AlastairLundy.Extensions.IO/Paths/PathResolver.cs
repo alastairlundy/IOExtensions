@@ -106,7 +106,27 @@ public class PathResolver : IPathResolver
 
     public string ToAbsolutePath(string path)
     {
+        string normalizedPath = NormalizePath(path);
         
+        string[] parts = normalizedPath.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+
+        StringBuilder newAbsolutePath = new StringBuilder();
+        
+        foreach (string part in parts)
+        {
+            if (part.StartsWith('$'))
+            {
+                
+            }
+
+            if (part.StartsWith('.') || part.StartsWith(".."))
+            {
+                
+            }
+        }
+        
+        
+        return newAbsolutePath.ToString();
     }
 
     public string NormalizePath(string path)
